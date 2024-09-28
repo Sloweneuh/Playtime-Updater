@@ -116,6 +116,7 @@ def refresh_radiobuttons():
             registry_radiobuttons[game_name].config(style="")
             text_radiobuttons[game_name].config(style="")
 
+# Get the file path from a text file
 def get_file_path():
     if os.path.exists("config.txt"):
         with open("config.txt", "r") as f:
@@ -140,6 +141,7 @@ def select_file_path():
         file_path = path
         refresh_radiobuttons()
 
+# Check if registry keys exist
 def check_registry_keys(registry_path):
     try:
         registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_path, 0, winreg.KEY_READ)
@@ -195,7 +197,7 @@ main_frame.grid(row=0, column=0, sticky="nsew")
 style = ttk.Style()
 style.configure("Green.TRadiobutton", foreground="green")
 
-# Create labels and radiobuttons for each game
+# Initialize the list of games
 games = create_game_list()
 
 # Dictionary to store IntVars and Radiobuttons for each game
@@ -243,7 +245,7 @@ update_button = ttk.Button(main_frame, text="Update Playtime", style="Accent.TBu
 update_button.grid(row=len(games)*3+1, column=0, columnspan=2, pady=20, padx=5)
 
 # Create a button to display instructions
-help_button = ttk.Button(main_frame, text="?", width=2, command=lambda: messagebox.showinfo("Instructions", "Select the source of playtime data for each game.\nThe higher value will be displayed in green.\nClick 'Update Playtime' to save the selected data source.\nNothing will be changed if no option is selected."))
+help_button = ttk.Button(main_frame, text="?", width=2, command=lambda: messagebox.showinfo("Instructions", "Only games that were launched at least once via Collapse Launcher will be displayed.\n\nYou can select where the file storing playtime will be located.\n\nSelect the source of playtime data for each game.\nThe higher value will be displayed in green.\n\nClick 'Update Playtime' to save the selected data source.\nNothing will be changed if no option is selected."))
 help_button.grid(row=len(games)*3+1, column=2, pady=20, padx=5)
 
 # Create a button to change the theme
