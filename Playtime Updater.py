@@ -142,10 +142,12 @@ def select_file_path():
 
 def check_registry_keys(registry_path):
     try:
-        winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_path, 0, winreg.KEY_READ)
-        return True
+        registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, registry_path, 0, winreg.KEY_READ)
+        value, regtype = winreg.QueryValueEx(registry_key, "CollapseLauncher_Playtime")
     except FileNotFoundError:
+        print(f"Registry key not found: {registry_path}")
         return False
+    return True
 
 # Creater game list
 def create_game_list():
