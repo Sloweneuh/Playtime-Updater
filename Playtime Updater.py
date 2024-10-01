@@ -5,6 +5,8 @@ from tkinter import messagebox
 from tkinter import filedialog
 from tkinter import ttk
 
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+
 # Read playtime value from registry
 def read_playtime_from_registry(registry_path):
     try:
@@ -186,7 +188,7 @@ root.resizable(False, False)
 root.iconbitmap("icon.ico")
 
 # Load the custom theme
-root.tk.call("source", "azure.tcl")
+root.tk.call("source", f"{script_dir}/azure.tcl")
 root.tk.call("set_theme", "dark")
 
 # Create a frame to add padding
